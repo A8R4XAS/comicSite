@@ -1,0 +1,44 @@
+[
+  {
+    "id": "comic-1",
+    "title": "Moonlight Courier",
+    "description": "A courier delivers parcels to the moon.",
+    "cover": "/comics/comic-1-cover.svg",
+    "pages": [
+      "/comics/comic-1-p1.svg",
+      "/comics/comic-1-p2.svg",
+      "/comics/comic-1-p3.svg"
+    ]
+  },
+  {
+    "id": "comic-2",
+    "title": "The Last Coffee",
+    "description": "Two robots share the final cup of coffee.",
+    "cover": "/comics/comic-2-cover.svg",
+    "pages": [
+      "/comics/comic-2-p1.svg",
+      "/comics/comic-2-p2.svg"
+    ]
+  },
+  {
+    "id": "comic-3",
+    "title": "Cat vs. Laser",
+    "description": "An epic duel of whiskers and light.",
+    "cover": "/comics/comic-3-cover.svg",
+    "pages": [
+      "/comics/comic-3-p1.svg",
+      "/comics/comic-3-p2.svg",
+      "/comics/comic-3-p3.svg",
+      "/comics/comic-3-p4.svg"
+    ]
+  },
+  {
+    "id": "comic-4",
+    "title": "Tiny Dragon",
+    "description": "A dragon too small to be scary.",
+    "cover": "/comics/comic-4-cover.svg",
+    "pages": [
+      "/comics/comic-4-p1.svg"
+    ]
+  }
+]
