@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import comics from '../data/comics.json'
 
@@ -10,6 +10,11 @@ export default function Viewer() {
   const comic = comics.find((c) => c.id === id)
   const [page, setPage] = useState(0)
   const total = comic?.pages.length ?? 0
+  const activeThumb = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    activeThumb.current?.scrollIntoView?.({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+  }, [page])
 
   const prev = useCallback(() => setPage((p) => Math.max(0, p - 1)), [])
   const next = useCallback(() => setPage((p) => Math.min(total - 1, p + 1)), [total])
@@ -35,7 +40,7 @@ export default function Viewer() {
   }
 
   return (
-    <main className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-4 py-6">
+    <main className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-4 pb-28 pt-6">
       <div className="flex w-full items-center justify-between">
         <Link to="/" className="text-sm text-indigo-400 transition hover:text-indigo-300">
           ← Back to Gallery
@@ -59,6 +64,27 @@ export default function Viewer() {
           Next
         </button>
       </div>
+      <nav
+        aria-label="Page thumbnails"
+        className="fixed inset-x-0 bottom-0 z-10 flex gap-2 overflow-x-auto bg-gray-900/80 p-2 backdrop-blur"
+      >
+        {comic.pages.map((src, i) => (
+          <button
+            key={src}
+            ref={i === page ? activeThumb : undefined}
+            onClick={() => setPage(i)}
+            aria-label={`Go to page ${i + 1}`}
+            aria-current={i === page ? 'page' : undefined}
+            className={`h-16 w-12 shrink-0 overflow-hidden rounded transition-all sm:h-20 sm:w-16 ${
+              i === page
+                ? 'scale-105 ring-2 ring-blue-500'
+                : 'opacity-70 transition-opacity hover:opacity-100'
+            }`}
+          >
+            <img src={src} alt="" className="h-full w-full object-cover" />
+          </button>
+        ))}
+      </nav>
     </main>
   )
 }
